@@ -1,0 +1,23 @@
+import QtQuick
+import FlightSim
+
+Window {
+    width: 640
+    height: 480
+
+    visible: true
+    visibility: Window.AutomaticVisibility
+    minimumHeight: 480
+    minimumWidth: 640
+    flags: Qt.Window
+    contentOrientation: Qt.LandscapeOrientation
+    title: "FlightSim_Design"
+
+    Screen01 {
+
+        id: mainScreen
+        anchors.fill: parent
+    }
+
+}
+

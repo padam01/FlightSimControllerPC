@@ -1,0 +1,363 @@
+
+
+/*
+This is a UI file (.ui.qml) that is intended to be edited in Qt Design Studio only.
+It is supposed to be strictly declarative and only uses a subset of QML. If you edit
+this file manually, you might introduce QML code that is not supported by Qt Design Studio.
+Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on .ui.qml files.
+*/
+import QtQuick
+import QtQuick.Controls
+import FlightSim
+import QtQuick.Layouts
+import QtQuick.Studio.DesignEffects
+
+Rectangle {
+    id: main
+    color: "#fe232121"
+    property alias gridLayoutColumnSpacing: gridLayout.columnSpacing
+
+    ColumnLayout {
+        id: columnLayout
+        anchors.fill: parent
+        anchors.leftMargin: 10
+        anchors.rightMargin: 10
+        anchors.topMargin: 10
+        anchors.bottomMargin: 10
+
+        spacing: 0
+
+        RowLayout {
+            id: rowLayout
+            uniformCellSizes: false
+            spacing: 5
+            layoutDirection: Qt.LeftToRight
+            Layout.alignment: Qt.AlignRight | Qt.AlignTop
+
+            Text {
+                id: text3
+                height: 20
+                color: "#ffffff"
+                text: qsTr("Flight Sim Controller:")
+                font.pixelSize: 12
+                verticalAlignment: Text.AlignVCenter
+                Layout.fillWidth: false
+            }
+
+            Rectangle {
+                id: fsc_indicator11
+                width: 10
+                height: 10
+                color: "#ff0000"
+                radius: 5
+                Layout.fillWidth: false
+            }
+
+            Text {
+                id: text5
+                height: 20
+                color: "#ffffff"
+                text: qsTr("MSFS:")
+                font.pixelSize: 12
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Rectangle {
+                id: msfs_indicator
+                width: 10
+                height: 10
+                color: "#ff0000"
+                radius: 5
+            }
+        }
+
+        RowLayout {
+            id: rowLayout4
+            Layout.topMargin: 40
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            uniformCellSizes: false
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.bottomMargin: 20
+            spacing: 20
+            Layout.margins: 0
+
+            ColumnLayout {
+                id: columnLayout1
+                Layout.preferredHeight: -1
+                Layout.preferredWidth: -1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Item {
+                    id: item1
+                    width: 200
+                    height: 200
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: 1
+                    Layout.fillWidth: true
+
+                    Slider {
+                        id: slider
+                        value: 0
+                        objectName: "flap"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.bottom: parent.bottom
+                        anchors.leftMargin: 10
+                        anchors.bottomMargin: 0
+                        stepSize: 0.1
+                        bottomPadding: 30
+                        topPadding: 30
+                        wheelEnabled: true
+                        orientation: Qt.Vertical
+                        Text {
+                            id: flap_title
+                            color: "#ffffff"
+                            text: qsTr("Flap")
+                            anchors.top: parent.top
+                            anchors.topMargin: 0
+                            font.pixelSize: 20
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignBottom
+                            font.weight: Font.Bold
+                            font.bold: false
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            Layout.fillWidth: true
+                        }
+
+                        Text {
+                            id: flap_value
+                            color: "#ffffff"
+                            text: qsTr("%1").arg(slider.value.toFixed(1))
+                            anchors.bottom: parent.bottom
+                            anchors.bottomMargin: 0
+                            font.pixelSize: 20
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignBottom
+                            font.weight: Font.Bold
+                            font.bold: false
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            Layout.fillWidth: true
+                        }
+
+                        Connections {
+                            target: slider
+                            function onValueChanged() {
+                                console.log("clicked")
+                            }
+                        }
+                        to: 20
+                        from: 0
+                    }
+                }
+            }
+
+            ColumnLayout {
+                id: columnLayout2
+                Layout.preferredWidth: -1
+                Layout.preferredHeight: -1
+                spacing: 0
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Rectangle {
+                    id: rectangle
+                    width: 200
+                    height: 200
+                    color: "#fe2e2b2b"
+                    radius: 5
+                    border.color: "#00998585"
+                    Layout.margins: 0
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    Layout.preferredWidth: 10
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    GridLayout {
+                        id: gridLayout
+                        columnSpacing: (rectangle.width) / (columns + 1)
+                        rowSpacing: 80
+                        columns: 6
+                        anchors.centerIn: parent
+
+                        Repeater {
+                            model: 4
+                            Rectangle {
+                                width: 20
+                                height: 20
+                                color: "#ff0000"
+                                radius: 10
+                                Layout.row: 0
+                                Layout.column: index + 1
+                            }
+                        }
+
+                        Repeater {
+                            model: 6
+                            Rectangle {
+                                width: 20
+                                height: 20
+                                color: "#ff0000"
+                                radius: 10
+                                Layout.row: 1
+                                Layout.column: index
+                            }
+                        }
+                    }
+
+                    DesignEffect {
+                        backgroundBlurVisible: true
+                        effects: [
+                            DesignDropShadow {
+                                visible: true
+                                color: "#b0c0b4b4"
+                                blur: 8
+                                showBehind: false
+                                offsetY: 2
+                                offsetX: 2
+                            }
+                        ]
+                    }
+                }
+            }
+
+            ColumnLayout {
+                id: columnLayout3
+                Layout.preferredWidth: -1
+                Layout.preferredHeight: -1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Item {
+                    id: item2
+                    width: 200
+                    height: 200
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: 1
+                    Layout.fillWidth: true
+
+                    Slider {
+                        id: slider1
+                        objectName: "trim"
+                        value: trim.trim_value
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        anchors.rightMargin: 10
+                        anchors.bottomMargin: 0
+                        stepSize: 0.1
+                        bottomPadding: 30
+                        topPadding: 30
+                        wheelEnabled: true
+                        orientation: Qt.Vertical
+
+                        Text {
+                            id: trim_title
+                            x: -26
+                            color: "#ffffff"
+                            text: qsTr("Trim")
+                            anchors.top: parent.top
+                            anchors.topMargin: 0
+                            font.pixelSize: 20
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignBottom
+                            font.weight: Font.Bold
+                            font.bold: false
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            Layout.fillWidth: true
+                        }
+
+                        Text {
+                            id: trim_value
+                            x: -26
+                            color: "#ffffff"
+                            text: qsTr("%1").arg(slider1.value.toFixed(1))
+                            anchors.bottom: parent.bottom
+                            anchors.bottomMargin: 0
+                            font.pixelSize: 20
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignBottom
+                            font.weight: Font.Bold
+                            font.bold: false
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            Layout.fillWidth: true
+                        }
+                        to: 1080
+                        from: -1080
+                    }
+                }
+            }
+        }
+    }
+
+    ListModel {
+        id: notificationModel
+        ListElement {
+            message: "test"
+        }
+    }
+
+    ListView {
+        id: listView
+        width: 220
+        height: parent.height
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.rightMargin: 10
+        anchors.topMargin: 50
+        orientation: ListView.Vertical
+        model: notificationModel
+        interactive: false
+        delegate: Rectangle {
+            id: notificationId
+            x: parent.width
+            width: 200
+            height: 50
+            color: "#e5302b26"
+            radius: 8
+            border.color: "#00ffffff"
+            Text {
+                color: "#ffffff"
+                text: message
+                font.pixelSize: 12
+                anchors.centerIn: parent
+            }
+
+            DesignEffect {
+                visible: true
+                effects: [
+                    DesignDropShadow {
+                        visible: true
+                        color: "#e3585a4f"
+                        spread: 2
+                        showBehind: false
+                        offsetY: 1
+                        offsetX: 1
+                    }
+                ]
+            }
+        }
+        Behavior {
+            NumberAnimation {
+                easing.type: Easing.OutCubic
+                duration: 400
+            }
+        }
+    }
+
+    Text {
+        id: text1
+        x: 232
+        y: 35
+        color: "#ffffff"
+        text: qsTr("%1").arg(gridLayout.columnSpacing.toFixed(2))
+        font.pixelSize: 12
+    }
+
+    states: [
+        State {
+            name: "clicked"
+        }
+    ]
+}

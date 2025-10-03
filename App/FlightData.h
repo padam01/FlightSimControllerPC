@@ -1,0 +1,12 @@
+#ifndef FLIGHTDATA_H
+#define FLIGHTDATA_H
+
+struct FlightData {
+    int ELEVATOR_TRIM_POSITION = 0;
+    int ELEVATOR_TRIM_DOWN_POSITION = 0;
+    int ELEVATOR_TRIM_UP_POSITION = 0;
+    int FLAPS_HANDLE_PERCENT = 0;
+};
+
+
+#endif // FLIGHTDATA_H
